@@ -6,7 +6,7 @@ import ListaDeTarefas from "./components/ListaDeTarefas.vue";
 
 const estado = reactive({
   filtro: "todas",
-  tarefaTemporaria: "",
+  tarefaTemp: "",
 
   tarefas: [
     {
@@ -45,20 +45,20 @@ const getTarefasFiltradas = () => {
   }
 }
 
-const cadastraTarefa = () => {
+const cadastraTarefa = (evento) => {
   const tarefaNova = {
-    titulo: estado.tarefaTemporaria,
+    titulo: estado.tarefaTemp,
     finalizada: false,
   };
   estado.tarefas.push(tarefaNova);
-  estado.tarefaTemporaria = "";
+  estado.tarefaTemp = "";
 };
 </script>
 
 <template>
   <div class="container">
     <Cabecalho :tarefas-pendentes="getTarefasPendentes().length"/>
-    <Formulario :trocar-filtro="evento => estado.filtro = evento.target.value" :tarefa-temp="estado.tarefaTemporaria" :edita-tarefa-temp="evento => estado.tarefaTemporaia = evento.target.value" :cadastra-tarefa="cadastraTarefa" />
+    <Formulario :trocar-filtro="evento => estado.filtro = evento.target.value" :tarefa-temp="estado.tarefaTemp" :edita-tarefa-temp="evento => estado.tarefaTemp = evento.target.value" :cadastra-tarefa="cadastraTarefa" />
     <ListaDeTarefas :tarefas="getTarefasFiltradas()"/>
   </div>
 </template>
