@@ -5,7 +5,10 @@ const props = defineProps(['tarefas'])
 
 <template>
   <ul class="list-group mt-4">
-    <li class="list-group-item" v-for="tarefa in props.tarefas">
+    <li class="list-group-item" v-if="props.tarefas.filter(t => !t.finalizada).length === 0">
+            Não existem tarefas pendentes
+        </li>
+    <li class="list-group-item" v-for="tarefa in props.tarefas ">
       <input
         @change="evento => tarefa.finalizada = evento.target.checked"
         :checked="tarefa.finalizada"
@@ -20,6 +23,7 @@ const props = defineProps(['tarefas'])
         {{ tarefa.titulo }}
       </label>
     </li>
+    
   </ul>
 </template>
 
